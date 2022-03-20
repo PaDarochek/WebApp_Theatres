@@ -1,0 +1,98 @@
+INSERT INTO theatres ("id", "name", address, ground_floor_rows, ground_floor_row_seats,
+					  balcony_rows, balcony_row_seats, mezzanine_rows, mezzanine_row_seats) VALUES
+	(DEFAULT, 'Московский Художественный театр имени А.П. Чехова', 'Москва, Камергерский переулок, дом 3',
+	20, 18, 6, 25, 6, 24),
+	(DEFAULT, 'Государственный академический Большой театр России', 'Москва, пл. Театральная, 1',
+	30, 15, 2, 90, 12, 70),
+	(DEFAULT, 'Государственный академический Малый театр', 'Москва, Театральный проезд, д. 1',
+	10, 20, 2, 56, 7, 30),
+	(DEFAULT, 'Московский государственный академический театр оперетты', 'г. Москва, ул. Большая Дмитровка, д. 6',
+	20, 20, 3, 30, 5, 30),
+	(DEFAULT, 'Московский Государственный Театр Эстрады', 'г. Москва, Берсеневская набережная, дом 20/2',
+	18, 40, 1, 52, 10, 60);
+
+INSERT INTO performances ("id", "name", theatre, duration) VALUES
+	(DEFAULT, 'Моя бедная крыша', 5, 120),
+	(DEFAULT, 'Пролётный гусь', 1, 170),
+	(DEFAULT, 'Офелия боится воды', 1, 120),
+	(DEFAULT, 'Джейн Эйр', 4, 130),
+	(DEFAULT, 'Мистер Икс', 4, 120),
+	(DEFAULT, 'Мастер и Маргарита', 2, 180),
+	(DEFAULT, 'Светлый ручей', 2, 120),
+	(DEFAULT, 'Месяц в деревне', 3, 180),
+	(DEFAULT, 'Тайны Мадридского двора', 3, 180);
+
+INSERT INTO sessions ("id", performance, date_time, ground_floor_cost, balcony_cost, mezzanine_cost) VALUES
+	(DEFAULT, 1, '2022-04-20 19:00', 1500, 1200, 1000),
+	(DEFAULT, 2, '2022-04-15 18:00', 1800, 1600, 1300),
+	(DEFAULT, 3, '2022-04-27 20:00', 1700, 1500, 1200),
+	(DEFAULT, 4, '2022-04-06 19:00', 1200, 1000, 800),
+	(DEFAULT, 5, '2022-04-17 20:00', 1100, 900, 700),
+	(DEFAULT, 6, '2022-04-03 18:00', 2500, 2000, 1700),
+	(DEFAULT, 7, '2022-04-12 20:00', 2300, 1800, 1500),
+	(DEFAULT, 8, '2022-04-28 19:00', 2100, 1700, 1400),
+	(DEFAULT, 9, '2022-04-18 20:00', 2000, 1600, 1300);
+
+INSERT INTO tickets ("id", "session", category, "row", row_seat) VALUES
+	(DEFAULT, 1, 'ground_floor', 9, 35),
+	(DEFAULT, 2, 'balcony', 3, 12),
+	(DEFAULT, 3, 'ground_floor', 3, 10),
+	(DEFAULT, 4, 'mezzanine', 1, 17),
+	(DEFAULT, 5, 'balcony', 2, 28),
+	(DEFAULT, 6, 'balcony', 1, 56),
+	(DEFAULT, 7, 'ground_floor', 11, 8),
+	(DEFAULT, 8, 'mezzanine', 7, 19),
+	(DEFAULT, 9, 'mezzanine', 4, 26);
+
+INSERT INTO workers ("id", "name") VALUES
+	(DEFAULT, 'Михаил Фоменко'),
+	(DEFAULT, 'Дарья Шевчук'),
+	(DEFAULT, 'Полина Долинская'),
+	(DEFAULT, 'Мария Дунаевская'),
+	(DEFAULT, 'Василий Дахненко'),
+	(DEFAULT, 'Максим Филатов'),
+	(DEFAULT, 'Дмитрий Марин'),
+	(DEFAULT, 'Мария Кривенцева'),
+	(DEFAULT, 'Владимир Алексеев'),
+	(DEFAULT, 'Александр Наумов'),
+	(DEFAULT, 'Дмитрий Кривошеев'),
+	(DEFAULT, 'Денис Савин'),
+	(DEFAULT, 'Ольга Смирнова'),
+	(DEFAULT, 'Артемий Беляков'),
+	(DEFAULT, 'Вячеслав Лопатин');
+
+INSERT INTO admins ("id", login, "password") VALUES
+	(DEFAULT, 'admin_1', 'iwFBAL'),
+	(DEFAULT, 'admin_2', 'Jy957y'),
+	(DEFAULT, 'admin_3', 'gnVvAi'),
+	(DEFAULT, 'admin_4', '7B3giS'),
+	(DEFAULT, 'admin_5', '4qzTwO');
+
+INSERT INTO workers_performances (performance, worker, job, "character") VALUES
+	(1, 1, 'director', ''),
+	(2, 7, 'director', ''),
+	(3, 9, 'director', ''),
+	(4, 2, 'director', ''),
+	(5, 5, 'director', ''),
+	(6, 5, 'director', ''),
+	(7, 1, 'director', ''),
+	(8, 9, 'director', ''),
+	(9, 7, 'director', ''),
+	(1, 5, 'actor', 'Айвери'),
+	(1, 2, 'actor', 'Невеста'),
+	(2, 3, 'actor', ''),
+	(2, 4, 'actor', ''),
+	(3, 8, 'actor', 'Гера'),
+	(3, 13, 'actor', 'Лия'),
+	(4, 4, 'actor', 'Джейн Эйр'),
+	(4, 6, 'actor', 'Эдвард Рочестер'),
+	(5, 10, 'actor', 'Мистер Икс'),
+	(5, 13, 'actor', 'Теодора Вердье'),
+	(6, 12, 'actor', 'Мастер'),
+	(6, 13, 'actor', 'Маргарита'),
+	(7, 2, 'actor', 'Зина'),
+	(7, 11, 'actor', 'Пётр'),
+	(8, 14, 'actor', 'Аркадий Сергеич Иcлaeв'),
+	(8, 3, 'actor', 'Наталья Петровна'),
+	(9, 15, 'actor', 'Карл V, король Испании'),
+	(9, 8, 'actor', 'Элеонора Австрийская');

@@ -1,0 +1,7 @@
+main/entities/Theatre.class
+main/entities/WorkersPerformances.class
+main/entities/Admin.class
+main/entities/Performance.class
+main/entities/Worker.class
+main/entities/Ticket.class
+main/entities/Session.class

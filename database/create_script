@@ -1,0 +1,80 @@
+DROP TABLE IF EXISTS theatres;
+DROP TABLE IF EXISTS performances;
+DROP TABLE IF EXISTS sessions;
+DROP TABLE IF EXISTS tickets;
+DROP TABLE IF EXISTS workers;
+DROP TABLE IF EXISTS admins;
+DROP TABLE IF EXISTS workers_performances;
+
+CREATE SEQUENCE theatres_id_seq AS integer;
+ALTER SEQUENCE theatres_id_seq START 1;
+CREATE TABLE theatres (
+	"id" integer DEFAULT nextval('theatres_id_seq') PRIMARY KEY,
+	"name" varchar(200) NOT NULL,
+	address varchar(500),
+	ground_floor_rows integer NOT NULL CHECK (ground_floor_rows > 0),
+	ground_floor_row_seats integer NOT NULL CHECK (ground_floor_row_seats > 0),
+	balcony_rows integer CHECK (balcony_rows >= 0),
+	balcony_row_seats integer CHECK (balcony_row_seats >= 0),
+	mezzanine_rows integer CHECK (mezzanine_rows >= 0),
+	mezzanine_row_seats integer CHECK (mezzanine_row_seats >= 0)
+);
+ALTER SEQUENCE theatres_id_seq OWNED BY theatres.id;
+
+CREATE SEQUENCE performances_id_seq AS integer;
+ALTER SEQUENCE performances_id_seq START 1;
+CREATE TABLE performances (
+	"id" integer DEFAULT nextval('performances_id_seq') PRIMARY KEY,
+	"name" varchar(300) NOT NULL,
+	theatre integer REFERENCES theatres ("id"),
+	duration integer NOT NULL CHECK (duration > 0 AND duration <= 360)
+);
+ALTER SEQUENCE performances_id_seq OWNED BY performances.id;
+
+CREATE SEQUENCE sessions_id_seq AS integer;
+ALTER SEQUENCE sessions_id_seq START 1;
+CREATE TABLE sessions (
+	"id" integer DEFAULT nextval('sessions_id_seq') PRIMARY KEY,
+	performance integer REFERENCES performances ("id"),
+	date_time timestamp NOT NULL,
+	ground_floor_cost integer NOT NULL CHECK (ground_floor_cost > 0),
+	balcony_cost integer CHECK (balcony_cost >= 0),
+	mezzanine_cost integer CHECK (mezzanine_cost >= 0)
+);
+ALTER SEQUENCE sessions_id_seq OWNED BY sessions.id;
+
+CREATE SEQUENCE tickets_id_seq AS integer;
+ALTER SEQUENCE tickets_id_seq START 1;
+CREATE TABLE tickets (
+	"id" integer DEFAULT nextval('tickets_id_seq') PRIMARY KEY,
+	"session" integer REFERENCES sessions ("id"),
+	category varchar(20) NOT NULL
+		CHECK (category = 'ground_floor' OR category = 'balcony' OR category = 'mezzanine'),
+	"row" integer NOT NULL CHECK (row > 0),
+	row_seat integer NOT NULL CHECK (row_seat > 0)
+);
+ALTER SEQUENCE tickets_id_seq OWNED BY tickets.id;
+
+CREATE SEQUENCE workers_id_seq AS integer;
+ALTER SEQUENCE workers_id_seq START 1;
+CREATE TABLE workers (
+	"id" integer DEFAULT nextval('workers_id_seq') PRIMARY KEY,
+	"name" varchar(100) NOT NULL
+);
+ALTER SEQUENCE workers_id_seq OWNED BY workers.id;
+
+CREATE SEQUENCE admins_id_seq AS integer;
+ALTER SEQUENCE admins_id_seq START 1;
+CREATE TABLE admins (
+	"id" integer DEFAULT nextval('admins_id_seq') PRIMARY KEY,
+	login varchar(100) NOT NULL,
+	"password" varchar(100) NOT NULL
+);
+ALTER SEQUENCE admins_id_seq OWNED BY admins.id;
+
+CREATE TABLE workers_performances (
+	performance integer REFERENCES performances ("id"),
+	worker integer REFERENCES workers ("id"),
+	job varchar(20) NOT NULL CHECK (job = 'director' OR job = 'actor'),
+	"character" varchar(30)
+);
