@@ -4,10 +4,10 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:postgresql://localhost/theatres-base</property> <!-- BD Mane -->
+        <property name="connection.url">jdbc:postgresql://localhost/WebApp_Theatres</property> <!-- BD Mane -->
         <property name="connection.driver_class">org.postgresql.Driver</property> <!-- DB Driver -->
         <property name="connection.username">postgres</property> <!-- DB User -->
-        <property name="connection.password">1</property> <!-- DB Password -->
+        <property name="connection.password">postgres123</property> <!-- DB Password -->
         <property name="show_sql">true</property> <!-- Show SQL in console -->
         <property name="format_sql">true</property> <!-- Show SQL formatted -->
         <property name="use_sql_comments">true</property>
