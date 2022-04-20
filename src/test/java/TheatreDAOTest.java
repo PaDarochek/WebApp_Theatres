@@ -1,5 +1,5 @@
 import DAO.TheatreDAO;
-import com.beust.jcommander.internal.Lists;
+import com.google.common.collect.Lists;
 import entities.Theatre;
 import org.junit.Assert;
 import org.junit.Test;

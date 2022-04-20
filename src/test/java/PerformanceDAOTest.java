@@ -1,14 +1,10 @@
 import DAO.PerformanceDAO;
-import com.beust.jcommander.internal.Lists;
 import entities.Performance;
-import entities.Theatre;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
 
 public class PerformanceDAOTest {
     private PerformanceDAO performanceDAO = new PerformanceDAO();

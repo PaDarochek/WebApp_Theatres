@@ -1,5 +1,4 @@
 import DAO.WorkersPerformancesDAO;
-import entities.Worker;
 import entities.WorkersPerformances;
 import org.junit.Assert;
 import org.junit.Test;

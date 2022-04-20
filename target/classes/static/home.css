@@ -1,0 +1,215 @@
+@import url(https://fonts.googleapis.com/css?family=Lora);
+body {
+  margin:0;
+  background-size: cover;
+  background-attachment: fixed;
+  background-image: url("https://img09.rl0.ru/afisha/1808x1016q65i/s2.afisha.ru/upload/3740269/KlRRCYDsZpZYFuzfIZW2whK204afVtMsQjQBWVpqMnM.jpg");
+}
+h2 {
+  font-family: monospace;
+  color: #606060;
+}
+ul {
+  list-style: none;
+  margin: 0 auto;
+}
+a {
+  text-decoration: none;
+  font-family: 'Lora', serif;
+  transition: .5s linear;
+}
+i {
+  margin-right: 10px;
+}
+.menu {
+  border-radius: 5px;
+  position: sticky;
+  top: 0;
+  width: 17%;
+}
+
+.header-h1 {
+    position: absolute;
+    margin-left: 34%;
+    margin-right: auto;
+    top: 30%;
+    font-family: 'Merriweather', serif;
+    text-align: center;
+    margin-bottom: .5rem;
+  }
+  .header-h1 h1 {
+    display: inline-block;
+    position: relative;
+    background: #f7e0cb;
+    color: #361b09;
+    margin-bottom: 0;
+    padding: .5rem 3rem;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    clip-path: polygon(0 0, 100% 0, 95% 50%, 100% 100%, 0 100%, 5% 50%);
+  }
+
+@import url(https://fonts.googleapis.com/css?family=Lora);
+.left { float: left; }
+.right { float: right; }
+
+@import url('https://fonts.googleapis.com/css?family=Marck+Script');
+.menu ul {
+  border-radius: 5px;
+  font-family: 'Marck Script', sans-serif;
+  font-size: 20px;
+  background-clip: content-box;
+  background-color: rgba(38, 63, 63, .7);
+  margin: 0;
+  padding: 0;
+}
+.menu ul li {
+  border-radius: 5px;
+  list-style: none;
+  /*border-top: 1px solid #243047;*/
+  border-bottom: 1px solid #243047;
+  margin: -1px 0;
+  transition: 0.5s all linear;
+}
+.menu ul li a {
+  padding: 1em;
+  display: block;
+  border-right: 1px solid #243047;
+  text-decoration: none;
+  color: #f7e0cb;
+}
+.menu ul li a span {
+  position: relative;
+  display: inline-block;
+}
+.menu a:hover {
+  border-radius: 5px;
+  background-clip: border-box;
+  background-color: #2F4F4F;
+  /*background-color: #b19891;*/
+  /*background-color: #597272;*/
+}
+
+.six {
+  padding: 50px 20px;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  margin-left: 33.5%;
+}
+.six h1 {
+  font-weight: normal;
+  font-family: 'Merriweather', serif;
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  line-height: 1;
+  color: #f7e0cb;
+  font-size: 40px;
+  padding: .4em 1em .55em;
+}
+.six h1:before,
+.six h1:after {
+  content: "";
+  position: absolute;
+  width: 60%;
+  height: .1em;
+  background: #F7844E;
+}
+.six h1:before {
+  left: 0;
+  top: 0;
+}
+.six h1:after {
+  right: 0;
+  bottom: 0;
+}
+.six h1 span:before,
+.six h1 span:after {
+  content: "";
+  position: absolute;
+  width: .65em;
+  height: .65em;
+  border: .1em solid #F7844E;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+.six h1 span:before {
+  top: -.55em;
+  left: -.325em;
+}
+.six h1 span:after {
+  bottom: -.55em;
+  right: -.325em;
+}
+@media (max-width: 600px) {
+  .six h1 {font-size: 2em;}
+}
+@media (max-width: 450px) {
+  .six h1 {font-size: 1.5em;}
+}
+
+@import url(http://fonts.googleapis.com/css?family=Fredericka+the+Great);
+@import url(http://fonts.googleapis.com/css?family=Palatino);
+table {
+  border-spacing: 0 20px;
+  font-family: 'Fredericka the Great', cursive;
+  margin: auto;
+  width: 55%;
+  align: center;
+}
+.perf {
+  font-family: 'URW Palladio L', cursive;
+  font-size: 30px;
+  color: #361b09;
+}
+.th {
+  font-family: 'Fredericka the Great', cursive;
+  font-size: 20px;
+  color: darkslategray;
+}
+.dt {
+  font-family: 'TeX Gyre Schola', serif;
+  font-size: 20px;
+  color: darkslategray;
+}
+tr {
+  padding-top: 20px;
+  padding: 20px 20px;
+  margin-left: 10em;
+  margin-right: 10em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 50px;
+    letter-spacing: 2px;
+    transition: 0.3s all linear;
+    vertical-align: middle;
+    font-size: 14px;
+    text-align: center;
+  border-left: 10px solid #f05d22;
+  box-shadow: 2px -2px 5px 0 rgba(0,0,0,.1),
+     -2px -2px 5px 0 rgba(0,0,0,.1),
+     2px 2px 5px 0 rgba(0,0,0,.1),
+     -2px 2px 5px 0 rgba(0,0,0,.1);
+  border-top: 2px solid #56433D;
+  border-bottom: 2px solid #56433D;
+  border-right: 2px solid #56433D;
+  border-radius: 5px;
+}
+td {
+  background-clip: content-box;
+  background-color: #f7e0cb;
+}
+td:first-child {
+  border-radius: 5px 0 0 5px;
+  border-left: 10px;
+  border-right: none;
+}
+td:last-child {
+  border-radius: 0 5px 5px 0;
+  border-left: none;
+  border-right: 10px;
+}*/
+/*td:nth-child(2){
+  text-align: left;
+}*/
