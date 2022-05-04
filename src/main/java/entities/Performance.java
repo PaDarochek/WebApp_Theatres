@@ -1,5 +1,7 @@
 package entities;
 
+import DAO.SessionDAO;
+import DAO.TheatreDAO;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -16,7 +18,7 @@ public class Performance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -27,23 +29,24 @@ public class Performance {
     private Theatre theatre;
 
     @Column(name = "duration")
-    private int duration;
+    private Long duration;
 
-    public Performance(int id, String name, int theatreId, int duration) {
+    public Performance(Long id, String name, Long theatreId, Long duration) {
         this.id = id;
         this.name = name;
-        this.theatre.setId(theatreId);
+        TheatreDAO theatreDAO = new TheatreDAO();
+        this.theatre = theatreDAO.getEntityById(theatreId, Theatre.class);
         this.duration = duration;
     }
 
     public Performance() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -63,11 +66,24 @@ public class Performance {
         this.theatre = theatre;
     }
 
-    public int getDuration() {
+    public Long getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+        final Performance other = (Performance) object;
+        return (this.id.equals(other.id) && this.name.equals(other.name) && this.theatre.equals(other.theatre) &&
+                this.duration.equals(other.duration));
     }
 }

@@ -12,7 +12,7 @@ public class TheatreDAOTest {
 
     @Test
     public void getTheatreByIdTest() {
-        Integer id = Integer.valueOf(3);
+        Long id = Long.valueOf(3);
         Theatre theatre = theatreDAO.getEntityById(id, Theatre.class);
         Assert.assertEquals("Государственный академический Малый театр", theatre.getName());
     }

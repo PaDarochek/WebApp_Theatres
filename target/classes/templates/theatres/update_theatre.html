@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="home.css"/>
+    <title>Обновить театр</title>
+</head>
+<body>
+<div class="six">
+    <h1>
+        <span>
+            Театральная касса
+        </span>
+    </h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-menu">
+            <nav class="menu" id="menu">
+                <ul>
+                    <li><a href="/"><span>Главная</span></a></li>
+                    <li><a id="theatres_button" href="/theatres"><span>Театры</span></a></li>
+                    <li><a href="/performances"><span>Представления</span></a></li>
+                    <li><a th:if="${!#ctx.containsVariable('admin')}" href="/authorize"><span>Войти (для администаторов)</span></a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-main">
+            <div class="header-h1">
+                <h1>
+                    <span th:text="${'Обновить: ' + theatre.getName()}"></span>
+                </h1>
+            </div>
+            <div>
+                <table class="main-table">
+                    <tr class="one">
+                        <td>
+                            <span class="dt" th:text="${'Название: ' + theatre.getName()}"></span>
+                            <br>
+                            <form action="/update_theatre_save" method="get">
+                                <br>
+                                <div class="mb-3">
+                                    <label for="name" class="th">Новое название:</label>
+                                    <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp">
+                                    <br>
+                                </div>
+                                <button type="submit" class="double-border-button-right">Обновить</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <tr class="one">
+                        <td>
+                            <span class="dt" th:text="${'Адрес: ' + theatre.getAddress()}"></span>
+                            <br>
+                            <form action="/update_theatre_save" method="get">
+                                <br>
+                                <div class="mb-3">
+                                    <label for="address" class="th">Изменить адрес:</label>
+                                    <input type="text" class="form-control" name="address" id="address" aria-describedby="emailHelp">
+                                    <br>
+                                </div>
+                                <button type="submit" class="double-border-button-right">Обновить</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <tr class="one">
+                        <td>
+                            <span class="dt" th:text="${'Количество рядов в партере: ' + theatre.getGround_floor_rows()}"></span>
+                            <br>
+                            <form action="/update_theatre_save" method="get">
+                                <br>
+                                <div class="mb-3">
+                                    <label for="gr_fl_rows" class="th">Изменить количество рядов в партере:</label>
+                                    <input type="text" class="form-control" name="gr_fl_rows" id="gr_fl_rows" aria-describedby="emailHelp">
+                                    <br>
+                                </div>
+                                <button type="submit" class="double-border-button-right">Обновить</button>
+                            </form>
+                            <br>
+                            <span id="gr_fl_text" class="dt" th:text="${'Количество мест в ряду в партере: ' + theatre.getGround_floor_row_seats()}"></span>
+                            <br>
+                            <form action="/update_theatre_save" method="get">
+                                <br>
+                                <div class="mb-3">
+                                    <label for="gr_fl_seats" class="th">Изменить количество мест в ряду в партере:</label>
+                                    <input type="text" class="form-control" name="gr_fl_seats" id="gr_fl_seats" aria-describedby="emailHelp">
+                                    <br>
+                                </div>
+                                <button id="gr_fl_button" type="submit" class="double-border-button-right">Обновить</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <tr class="one">
+                        <td>
+                            <span class="dt" th:text="${'Количество рядов в бельэтаже: ' + theatre.getMezzanine_rows()}"></span>
+                            <br>
+                            <form action="/update_theatre_save" method="get">
+                                <br>
+                                <div class="mb-3">
+                                    <label for="mez_rows" class="th">Изменить количество рядов в бельэтаже:</label>
+                                    <input type="text" class="form-control" name="mez_rows" id="mez_rows" aria-describedby="emailHelp">
+                                    <br>
+                                </div>
+                                <button type="submit" class="double-border-button-right">Обновить</button>
+                            </form>
+                            <br>
+                            <span class="dt" th:text="${'Количество мест в ряду в бельэтаже: ' + theatre.getMezzanine_row_seats()}"></span>
+                            <br>
+                            <form action="/update_theatre_save" method="get">
+                                <br>
+                                <div class="mb-3">
+                                    <label for="mez_seats" class="th">Изменить количество мест в ряду в бельэтаже:</label>
+                                    <input type="text" class="form-control" name="mez_seats" id="mez_seats" aria-describedby="emailHelp">
+                                    <br>
+                                </div>
+                                <button type="submit" class="double-border-button-right">Обновить</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <tr class="one">
+                        <td>
+                            <span class="dt" th:text="${'Количество рядов на балконе: ' + theatre.getBalcony_rows()}"></span>
+                            <br>
+                            <form action="/update_theatre_save" method="get">
+                                <br>
+                                <div class="mb-3">
+                                    <label for="bal_rows" class="th">Изменить количество рядов на балконе:</label>
+                                    <input type="text" class="form-control" name="bal_rows" id="bal_rows" aria-describedby="emailHelp">
+                                    <br>
+                                </div>
+                                <button type="submit" class="double-border-button-right">Обновить</button>
+                            </form>
+                            <br>
+                            <span class="dt" th:text="${'Количество мест в ряду на балконе: ' + theatre.getBalcony_row_seats()}"></span>
+                            <br>
+                            <form action="/update_theatre_save" method="get">
+                                <br>
+                                <div class="mb-3">
+                                    <label for="bal_seats" class="th">Изменить количество мест в ряду на балконе:</label>
+                                    <input type="text" class="form-control" name="bal_seats" id="bal_seats" aria-describedby="emailHelp">
+                                    <br>
+                                </div>
+                                <button type="submit" class="double-border-button-right">Обновить</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -25,14 +25,9 @@ i {
   border-radius: 5px;
   position: sticky;
   top: 0;
-  width: 17%;
 }
 
 .header-h1 {
-  position: absolute;
-  margin-left: 34%;
-  margin-right: auto;
-  top: 30%;
   font-family: 'Merriweather', serif;
   text-align: center;
   margin-bottom: .5rem;
@@ -63,7 +58,6 @@ i {
 .menu ul li {
   border-radius: 5px;
   list-style: none;
-  /*border-top: 1px solid #243047;*/
   border-bottom: 1px solid #243047;
   margin: -1px 0;
   transition: 0.5s all linear;
@@ -83,8 +77,6 @@ i {
   border-radius: 5px;
   background-clip: border-box;
   background-color: #2F4F4F;
-  /*background-color: #b19891;*/
-  /*background-color: #597272;*/
 }
 
 .six {
@@ -145,15 +137,43 @@ i {
 @media (max-width: 450px) {
   .six h1 {font-size: 1.5em;}
 }
+.container {
+  width: 100%;
+  padding: 0;
+  margin: 0 auto;
+}
+.row {}
+.container:after, .row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.col-menu {
+  width: 18%;
+  float: left;
+  position: fixed;
+}
+.col-main {
+  margin-top: 180px;
+  margin-left: 25%;
+  width: 50%;
+  float: left;
+}
+.col-right {
+  margin-top: 180px;
+  margin-right: 20px;
+  width: 20%;
+  float: right;
+}
 
 @import url(http://fonts.googleapis.com/css?family=Fredericka+the+Great);
 @import url(http://fonts.googleapis.com/css?family=Palatino);
-table {
+.main-table {
   border-spacing: 0 20px;
   font-family: 'Fredericka the Great', cursive;
   margin: auto;
-  width: 55%;
   align: center;
+  width: 100%;
 }
 .perf {
   font-family: 'URW Palladio L', cursive;
@@ -170,7 +190,7 @@ table {
   font-size: 20px;
   color: darkslategray;
 }
-tr {
+.main-table tr {
   padding-top: 20px;
   padding: 20px 20px;
   margin-left: 10em;
@@ -193,17 +213,126 @@ tr {
   border-right: 2px solid #56433D;
   border-radius: 5px;
 }
-td {
+.many td {
   background-clip: content-box;
   background-color: #f7e0cb;
 }
-td:first-child {
+.many td:first-child {
   border-radius: 5px 0 0 5px;
   border-left: 10px;
   border-right: none;
 }
-td:last-child {
+.many td:last-child {
   border-radius: 0 5px 5px 0;
   border-left: none;
   border-right: 10px;
-}*/
+}
+.one td {
+   background-clip: content-box;
+   background-color: #f7e0cb;
+   border-radius: 5px;
+   border: 10px;
+ }
+
+#myInput {
+    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myUL {
+    /* Remove default list styling */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd; /* Add a border to all links */
+    margin-top: -1px; /* Prevent double borders */
+    background-color: #f6f6f6; /* Grey background color */
+    padding: 12px; /* Add some padding */
+    text-decoration: none; /* Remove default text underline */
+    font-size: 18px; /* Increase the font-size */
+    color: black; /* Add a black text color */
+    display: block; /* Make it into a block element to fill the whole list */
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee; /* Add a hover effect to all links, except for headers */
+}
+
+.button-table {
+  border-spacing: 0 20px;
+  border: none;
+  font-family: 'Fredericka the Great', cursive;
+  margin: auto;
+  align: center;
+}
+ .double-border-button-left {
+   background-color: rgba(38, 63, 63, .7);
+   text-decoration: none;
+   display: inline-block;
+   margin: 10px 20px;
+   padding: 10px 30px;
+   position: relative;
+   border: 2px solid #f7e0cb;
+   color: #f7e0cb;
+   font-family: 'Montserrat', sans-serif;
+   transition: .4s;
+ }
+ .double-border-button-left:after {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   width: 100%;
+   height: 100%;
+   margin: auto;
+   border: 2px solid rgba(0, 0, 0, 0);
+   transition: .4s;
+ }
+ .double-border-button-left:hover:after {
+   border-color: #f7e0cb;
+   width: calc(100% - 10px);
+   height: calc(100% + 10px);
+ }
+
+ .double-border-button-right {
+    right: 0;
+    background-color: rgba(38, 63, 63, .7);
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px 30px;
+    position: relative;
+    border: 2px solid #f7e0cb;
+    color: #f7e0cb;
+    font-family: 'Montserrat', sans-serif;
+    transition: .4s;
+  }
+  .double-border-button-right:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    border: 2px solid rgba(0, 0, 0, 0);
+    transition: .4s;
+  }
+  .double-border-button-right:hover:after {
+    border-color: #f7e0cb;
+    width: calc(100% - 10px);
+    height: calc(100% + 10px);
+  }

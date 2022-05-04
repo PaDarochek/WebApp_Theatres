@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="home.css"/>
+    <title>Добавить представление</title>
+</head>
+<body>
+<div class="six">
+    <h1>
+        <span>
+            Театральная касса
+        </span>
+    </h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-menu">
+            <nav class="menu" id="menu">
+                <ul>
+                    <li><a href="/"><span>Главная</span></a></li>
+                    <li><a href="/theatres"><span>Театры</span></a></li>
+                    <li><a id="performances_button" href="/performances"><span>Представления</span></a></li>
+                    <li><a th:if="${!#ctx.containsVariable('admin')}" href="/authorize"><span>Войти (для администаторов)</span></a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-main">
+            <div class="header-h1">
+                <h1>
+                    <span>Добавить представление:</span>
+                </h1>
+            </div>
+            <div>
+                <table class="main-table">
+                    <tr class="one">
+                        <td>
+                            <form action="/add_performance_save" method="get">
+                                <br>
+                                <div>
+                                    <label for="name" class="th">Название:</label>
+                                    <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp">
+                                    <br>
+                                    <label for="theatre_name" class="th">Название театра:</label>
+                                    <input type="text" class="form-control" name="theatre_name" id="theatre_name" aria-describedby="emailHelp">
+                                    <br>
+                                    <label for="duration" class="th">Продолжительность:</label>
+                                    <input type="text" class="form-control" name="duration" id="duration" aria-describedby="emailHelp">
+                                    <br>
+                                    <label for="director" class="th">Режиссёр:</label>
+                                    <input type="text" class="form-control" name="director" id="director" aria-describedby="emailHelp">
+                                    <br>
+                                </div>
+                                <button id="add_button" type="submit" class="double-border-button-right">Добавить</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

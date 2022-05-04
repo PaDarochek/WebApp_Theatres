@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="home.css"/>
+    <title th:text="${performance.getName()}"></title>
+</head>
+<body>
+<div class="six">
+    <h1>
+            <span>
+                Театральная касса
+            </span>
+    </h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-menu">
+            <nav class="menu" id="menu">
+                <ul>
+                    <li><a href="/"><span>Главная</span></a></li>
+                    <li><a href="/theatres"><span>Театры</span></a></li>
+                    <li><a href="/performances"><span>Представления</span></a></li>
+                    <li><a th:if="${!#ctx.containsVariable('admin')}" href="/authorize"><span>Войти (для администаторов)</span></a></li>
+                    <li><a id="update_performance" th:if="${#ctx.containsVariable('admin')}" th:href="@{'http://localhost:8080/update_performance?perf_id=' + ${performance.getId()}}">
+                        <span>Редактировать представление</span>
+                    </a></li>
+                    <li><a id="delete_performance" th:if="${#ctx.containsVariable('admin')}"
+                           th:href="@{'http://localhost:8080/delete_performance?perf_id=' + ${performance.getId()}}">
+                        <span>Удалить представление</span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-main">
+            <div class="header-h1">
+                <h1>
+                    <span th:text="${performance.getName()}"></span>
+                </h1>
+            </div>
+            <table class="main-table">
+                <tr class="one">
+                    <td>
+                        <span class="perf" th:text='${"Театр: " + performance.getTheatre().getName()}'></span>
+                        <br>
+                        <br>
+                        <span class="th" th:text='${"Режиссёры: " + directors}'></span>
+                        <br>
+                        <br>
+                        <span class="th" th:text='${"Актёры: " + actors}'></span>
+                    </td>
+                    <td class="dt">
+                        <span th:text='${"Продолжительность: " +
+                        new java.text.SimpleDateFormat("HH часов mm минут")
+                        .format(new java.sql.Timestamp(performance.getDuration() * 60000 - 10800000))}'></span>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="button-table">
+                <tr>
+                    <td>
+                        <span class="double-border-button-left">Ближайшие показы:</span>
+                    </td>
+                </tr>
+            </table>
+            <table class="main-table">
+                <tr class="many" th:each="s,stat : ${sessions}">
+                    <td>
+                        <span id="date_time" class="dt" th:text='${new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm").format(s.date_time)}'></span>
+                    </td>
+                    <td>
+                        <a id="buy_button" class="dt" th:href="@{'http://localhost:8080/choose_tickets?perf_id=' + ${s.getPerformance().getId()}
+                        + '&session_id=' + ${s.getId()}}">Купить билет</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

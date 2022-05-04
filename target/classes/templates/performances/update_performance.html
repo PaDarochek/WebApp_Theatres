@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="home.css"/>
+  <title>Обновить представление</title>
+</head>
+<body>
+<div class="six">
+    <h1>
+        <span>
+            Театральная касса
+        </span>
+    </h1>
+</div>
+
+<div class="container">
+    <div class="row">
+    <div class="col-menu">
+        <nav class="menu" id="menu">
+            <ul>
+                <li><a href="/"><span>Главная</span></a></li>
+                <li><a href="/theatres"><span>Театры</span></a></li>
+                <li><a id="performances_button" href="/performances"><span>Представления</span></a></li>
+                <li><a th:if="${!#ctx.containsVariable('admin')}" href="/authorize"><span>Войти (для администаторов)</span></a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col-main">
+        <div class="header-h1">
+            <h1>
+                <span th:text="${'Обновить: ' + performance.getName()}"></span>
+            </h1>
+        </div>
+        <div>
+            <table class="main-table">
+                <tr class="one">
+                    <td>
+                        <span class="dt" th:text="${'Название: ' + performance.getName()}"></span>
+                        <br>
+                        <form action="/update_performance_save" method="get">
+                            <br>
+                            <div class="mb-3">
+                                <label for="name" class="th">Новое название:</label>
+                                <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp">
+                                <br>
+                            </div>
+                            <button type="submit" class="double-border-button-right">Обновить</button>
+                        </form>
+                    </td>
+                </tr>
+
+                <tr class="one">
+                    <td>
+                        <span class="dt" th:text="${'Продолжительность: ' + new java.text.SimpleDateFormat('HH часов mm минут')
+                        .format(new java.sql.Timestamp(performance.getDuration() * 60000 - 10800000))}"></span>
+                        <br>
+                        <form action="/update_performance_save" method="get">
+                            <br>
+                            <div class="mb-3">
+                                <label for="duration" class="th">Изменить продолжительность:</label>
+                                <input type="text" class="form-control" name="duration" id="duration" aria-describedby="emailHelp">
+                                <br>
+                            </div>
+                            <button type="submit" class="double-border-button-right">Обновить</button>
+                        </form>
+                    </td>
+                </tr>
+
+                <tr class="one">
+                    <td>
+                        <span class="dt" th:text="${'Режиссёр: ' + director}"></span>
+                        <br>
+                        <form action="/update_performance_save" method="get">
+                            <br>
+                            <div class="mb-3">
+                                <label for="director" class="th">Изменить режиссёра:</label>
+                                <input type="text" class="form-control" name="director" id="director" aria-describedby="emailHelp">
+                                <br>
+                            </div>
+                            <button type="submit" class="double-border-button-right">Обновить</button>
+                        </form>
+                    </td>
+                </tr>
+
+                <tr class="one">
+                    <td>
+                        <span class="dt">Актёры:</span>
+                        <br>
+                        <div th:each="actor : ${actors.entrySet()}">
+                            <span class="dt" th:text="${actor.getKey().getName() + ': ' + actor.getValue()}"></span>
+                            <a class="double-border-button-right" th:href="@{'http://localhost:8080/update_performance_save?del_actor=' + ${actor.getKey().getId()}}">
+                                Удалить
+                            </a>
+                            <br>
+                        </div>
+                        <br>
+                        <form action="/update_performance_save" method="get">
+                            <br>
+                            <div class="mb-3">
+                                <label for="actor" class="th">Добавить актёра:</label>
+                                <input type="text" class="form-control" name="actor" id="actor" aria-describedby="emailHelp">
+                                <br>
+                                <label for="actor_role" class="th">Добавить роль:</label>
+                                <input type="text" class="form-control" name="actor_role" id="actor_role" aria-describedby="emailHelp">
+                                <br>
+                            </div>
+                            <button id="add_actor_button" type="submit" class="double-border-button-right">Добавить</button>
+                        </form>
+                    </td>
+                </tr>
+
+                <tr class="one">
+                    <td>
+                        <span class="dt">Показы:</span>
+                        <br>
+                        <br>
+                        <div th:each="s : ${sessions}">
+                            <span class="dt" th:text="${'Дата: ' + new java.text.SimpleDateFormat('dd.MM.yyyy').format(s.getDate_time())}"></span>
+                            <br>
+                            <span class="dt" th:text="${'Время: ' + new java.text.SimpleDateFormat('HH:mm').format(s.getDate_time())}"></span>
+                            <br>
+                            <span class="dt" th:text="${'Цена билета в партер: ' + s.getGround_floor_cost()}"></span>
+                            <br>
+                            <span class="dt" th:text="${'Цена билета в бельэтаж: ' + s.getMezzanine_cost()}"></span>
+                            <br>
+                            <span class="dt" th:text="${'Цена билета на балкон: ' + s.getBalcony_cost()}"></span>
+                            <br>
+                            <a class="double-border-button-right" th:href="@{'http://localhost:8080/update_performance_save?del_session=' + ${s.getId()}}">
+                                Удалить
+                            </a>
+                            <br>
+                        </div>
+                        <br>
+                        <form action="/update_performance_save" method="get">
+                            <br>
+                            <div class="mb-3">
+                                <label for="session_date_time" class="th">Добавить дату и время:</label>
+                                <input type="text" class="form-control" name="session_date_time" id="session_date_time" aria-describedby="emailHelp">
+                                <br>
+                                <label for="session_gr_fl" class="th">Добавить цену билета в партер:</label>
+                                <input type="text" class="form-control" name="session_gr_fl" id="session_gr_fl" aria-describedby="emailHelp">
+                                <br>
+                                <label for="session_mez" class="th">Добавить цену билета в бельэтаж:</label>
+                                <input type="text" class="form-control" name="session_mez" id="session_mez" aria-describedby="emailHelp">
+                                <br>
+                                <label for="session_bal" class="th">Добавить цену билета на балкон:</label>
+                                <input type="text" class="form-control" name="session_bal" id="session_bal" aria-describedby="emailHelp">
+                                <br>
+                            </div>
+                            <button id="add_session_button" type="submit" class="double-border-button-right">Добавить</button>
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+</html>

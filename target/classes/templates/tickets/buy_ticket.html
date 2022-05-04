@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="home.css"/>
+    <title th:text="${'Билет на ' + performance.getName()}"></title>
+</head>
+<body>
+<div class="six">
+    <h1>
+            <span>
+                Театральная касса
+            </span>
+    </h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-menu">
+            <nav class="menu" id="menu">
+                <ul>
+                    <li><a href="/"><span>Главная</span></a></li>
+                    <li><a href="/theatres"><span>Театры</span></a></li>
+                    <li><a href="/performances"><span>Представления</span></a></li>
+                    <li><a th:if="${!#ctx.containsVariable('admin')}" href="/authorize"><span>Войти (для администаторов)</span></a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-main">
+            <div class="header-h1">
+                <h1>
+                    <span th:text="${'Билет забронирован!'}"></span>
+                </h1>
+            </div>
+            <table class="main-table">
+                <tr class="one">
+                    <td>
+                        <a class="perf" th:href="@{'http://localhost:8080/performance_page?id=' + ${performance.getId()}}">
+                            <span class="perf" th:text='${performance.getName()}'></span>
+                        </a>
+                        <br>
+                        <br>
+                        <span class="dt" th:text='${"Дата: " + new java.text.SimpleDateFormat("dd.MM.yyyy")
+                        .format(sess.getDate_time())}'></span>
+                        <br>
+                        <span class="dt" th:text='${"Время: " + new java.text.SimpleDateFormat("HH:mm")
+                        .format(sess.getDate_time())}'></span>
+                        <br>
+                        <br>
+                        <span class="th" th:if="${category.equals('ground_floor')}" th:text='${"Категория: партер"}'></span>
+                        <span class="th" th:if="${category.equals('mezzanine')}" th:text='${"Категория: бельэтаж"}'></span>
+                        <span class="th" th:if="${category.equals('balcony')}" th:text='${"Категория: балкон"}'></span>
+                        <br>
+                        <span class="th" th:text='${"Ряд: " + row}'></span>
+                        <br>
+                        <span class="th" th:text='${"Место: " + seat}'></span>
+                        <br>
+                        <span class="th" th:text='${"Уникальный номер билета: " + id}'></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

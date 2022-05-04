@@ -1,5 +1,9 @@
 package entities;
 
+import DAO.PerformanceDAO;
+import DAO.SessionDAO;
+import DAO.WorkerDAO;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -22,9 +26,11 @@ public class WorkersPerformances implements Serializable {
     @Column(name = "character")
     private String character;
 
-    public WorkersPerformances(int performanceId, int workerId, String job, String character) {
-        this.performance.setId(performanceId);
-        this.worker.setId(workerId);
+    public WorkersPerformances(Long performanceId, Long workerId, String job, String character) {
+        PerformanceDAO performanceDAO = new PerformanceDAO();
+        this.performance = performanceDAO.getEntityById(performanceId, Performance.class);
+        WorkerDAO workerDAO = new WorkerDAO();
+        this.worker = workerDAO.getEntityById(workerId, Worker.class);
         this.job = job;
         this.character = character;
     }

@@ -8,7 +8,7 @@ public class WorkerDAOTest {
 
     @Test
     public void workerUpdateTest() {
-        Worker worker = new Worker(15, "Вячеслав Александрович Лопатин");
+        Worker worker = new Worker(15L, "Вячеслав Александрович Лопатин");
         worker = workerDAO.update(worker);
         Assert.assertEquals("Вячеслав Александрович Лопатин", worker.getName());
     }

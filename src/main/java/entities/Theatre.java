@@ -15,7 +15,7 @@ public class Theatre {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -24,25 +24,25 @@ public class Theatre {
     private String address;
 
     @Column(name = "ground_floor_rows")
-    private int ground_floor_rows;
+    private Long ground_floor_rows;
 
     @Column(name = "ground_floor_row_seats")
-    private int ground_floor_row_seats;
+    private Long ground_floor_row_seats;
 
     @Column(name = "balcony_rows")
-    private int balcony_rows;
+    private Long balcony_rows;
 
     @Column(name = "balcony_row_seats")
-    private int balcony_row_seats;
+    private Long balcony_row_seats;
 
     @Column(name = "mezzanine_rows")
-    private int mezzanine_rows;
+    private Long mezzanine_rows;
 
     @Column(name = "mezzanine_row_seats")
-    private int mezzanine_row_seats;
+    private Long mezzanine_row_seats;
 
-    public Theatre(int id, String name, String address, int ground_floor_rows, int ground_floor_row_seats,
-                   int balcony_rows, int balcony_row_seats, int mezzanine_rows, int mezzanine_row_seats) {
+    public Theatre(Long id, String name, String address, Long ground_floor_rows, Long ground_floor_row_seats,
+                   Long balcony_rows, Long balcony_row_seats, Long mezzanine_rows, Long mezzanine_row_seats) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -57,11 +57,11 @@ public class Theatre {
     public Theatre() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -81,51 +81,63 @@ public class Theatre {
         this.address = address;
     }
 
-    public int getGround_floor_rows() {
+    public Long getGround_floor_rows() {
         return ground_floor_rows;
     }
 
-    public void setGround_floor_rows(int ground_floor_rows) {
+    public void setGround_floor_rows(Long ground_floor_rows) {
         this.ground_floor_rows = ground_floor_rows;
     }
 
-    public int getGround_floor_row_seats() {
+    public Long getGround_floor_row_seats() {
         return ground_floor_row_seats;
     }
 
-    public void setGround_floor_row_seats(int ground_floor_row_seats) {
+    public void setGround_floor_row_seats(Long ground_floor_row_seats) {
         this.ground_floor_row_seats = ground_floor_row_seats;
     }
 
-    public int getBalcony_rows() {
+    public Long getBalcony_rows() {
         return balcony_rows;
     }
 
-    public void setBalcony_rows(int balcony_rows) {
+    public void setBalcony_rows(Long balcony_rows) {
         this.balcony_rows = balcony_rows;
     }
 
-    public int getBalcony_row_seats() {
+    public Long getBalcony_row_seats() {
         return balcony_row_seats;
     }
 
-    public void setBalcony_row_seats(int balcony_row_seats) {
+    public void setBalcony_row_seats(Long balcony_row_seats) {
         this.balcony_row_seats = balcony_row_seats;
     }
 
-    public int getMezzanine_rows() {
+    public Long getMezzanine_rows() {
         return mezzanine_rows;
     }
 
-    public void setMezzanine_rows(int mezzanine_rows) {
+    public void setMezzanine_rows(Long mezzanine_rows) {
         this.mezzanine_rows = mezzanine_rows;
     }
 
-    public int getMezzanine_row_seats() {
+    public Long getMezzanine_row_seats() {
         return mezzanine_row_seats;
     }
 
-    public void setMezzanine_row_seats(int mezzanine_row_seats) {
+    public void setMezzanine_row_seats(Long mezzanine_row_seats) {
         this.mezzanine_row_seats = mezzanine_row_seats;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+        final Theatre other = (Theatre) object;
+        return (this.id.equals(other.id) && this.name.equals(other.name) && this.address.equals(other.address));
     }
 }

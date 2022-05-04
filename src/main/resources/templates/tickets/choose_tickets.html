@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="home.css"/>
+    <title th:text="${'Выбрать билет на ' + performance.getName()}"></title>
+</head>
+<body>
+<div class="six">
+    <h1>
+            <span>
+                Театральная касса
+            </span>
+    </h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-menu">
+            <nav class="menu" id="menu">
+                <ul>
+                    <li><a href="/"><span>Главная</span></a></li>
+                    <li><a href="/theatres"><span>Театры</span></a></li>
+                    <li><a href="/performances"><span>Представления</span></a></li>
+                    <li><a th:if="${!#ctx.containsVariable('admin')}" href="/authorize"><span>Войти (для администаторов)</span></a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-main">
+            <div class="header-h1">
+                <h1>
+                    <span th:text="${'Выбор билетов'}"></span>
+                </h1>
+            </div>
+            <table class="main-table">
+                <tr class="one">
+                    <td>
+                        <a class="perf" th:href="@{'http://localhost:8080/performance_page?id=' + ${performance.getId()}}">
+                            <span class="perf" th:text='${performance.getName()}'></span>
+                        </a>
+                        <br>
+                        <br>
+                        <span class="dt" th:text='${"Дата: " + new java.text.SimpleDateFormat("dd.MM.yyyy")
+                        .format(sess.getDate_time())}'></span>
+                        <br>
+                        <span class="dt" th:text='${"Время: " + new java.text.SimpleDateFormat("HH:mm")
+                        .format(sess.getDate_time())}'></span>
+                        <br>
+                        <br>
+                        <span class="th" th:text='${"Цена места в партере: " + sess.getGround_floor_cost()}'></span>
+                        <br>
+                        <span class="th" th:text='${"Цена места в бельэтаже: " + sess.getMezzanine_cost()}'></span>
+                        <br>
+                        <span class="th" th:text='${"Цена места на балконе: " + sess.getBalcony_cost()}'></span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-right">
+            <form action="/choose_category" method="get">
+                <label for="category" class="form-label" style="font-palette: light; color: #f7e1cb;">Выберите категорию:</label>
+                <p><select name="category" id="category">
+                    <option th:if="${#ctx.containsVariable('category') && category.equals('ground_floor')}"
+                            selected th:value="${category}">
+                        Партер
+                    </option>
+                    <option th:if="${#ctx.containsVariable('category') && category.equals('mezzanine')}"
+                            selected th:value="${category}">
+                        Бельэтаж
+                    </option>
+                    <option th:if="${#ctx.containsVariable('category') && category.equals('balcony')}"
+                            selected th:value="${category}">
+                        Балкон
+                    </option>
+                    <option th:if="${!#ctx.containsVariable('category') || !category.equals('ground_floor')}" value="ground_floor">Партер</option>
+                    <option th:if="${!#ctx.containsVariable('category') || !category.equals('mezzanine')}" value="mezzanine">Бельэтаж</option>
+                    <option th:if="${!#ctx.containsVariable('category') || !category.equals('balcony')}" value="balcony">Балкон</option>
+                </select></p>
+                <p><input id="category_button" type="submit" class="double-border-button-right" value="Подтвердить"></p>
+            </form>
+            <br>
+            <form action="/choose_row" method="get" th:if="${#ctx.containsVariable('category') && (#ctx.containsVariable('rows')
+        || #ctx.containsVariable('row'))}">
+                <label for="row" class="form-label" style="font-palette: light; color: #f7e1cb;">Выберите ряд:</label>
+                <p><select name="row" id="row">
+                    <option th:if="${#ctx.containsVariable('row')}" selected th:value="${row}">
+                        <span th:text="${row}"></span>
+                    </option>
+                    <option th:each="r : ${rows}" th:if="${#ctx.containsVariable('row') && row != r}" th:value="${r}">
+                        <span th:text="${r}"></span>
+                    </option>
+                    <option th:if="${!#ctx.containsVariable('row')}" th:each="r : ${rows}" th:value="${r}">
+                        <span th:text="${r}"></span>
+                    </option>
+                </select></p>
+                <p><input id="row_button" type="submit" class="double-border-button-right" value="Подтвердить"></p>
+            </form>
+            <br>
+            <form action="/buy_ticket" method="get" th:if="${#ctx.containsVariable('category') && #ctx.containsVariable('row')
+        && #ctx.containsVariable('seats')}">
+                <label for="seat" class="form-label" style="font-palette: light; color: #f7e1cb;">Выберите место:</label>
+                <p><select name="seat" id="seat">
+                    <option th:each="s : ${seats}" th:value="${s}">
+                        <span th:text="${s}"></span>
+                    </option>
+                </select></p>
+                <p><input id="seat_button" type="submit" class="double-border-button-right" value="Купить билет"></p>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

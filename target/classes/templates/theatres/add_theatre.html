@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="home.css"/>
+    <title>Добавить театр</title>
+</head>
+<body>
+<div class="six">
+    <h1>
+        <span>
+            Театральная касса
+        </span>
+    </h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-menu">
+            <nav class="menu" id="menu">
+                <ul>
+                    <li><a href="/"><span>Главная</span></a></li>
+                    <li><a href="/theatres"><span>Театры</span></a></li>
+                    <li><a href="/performances"><span>Представления</span></a></li>
+                    <li><a th:if="${!#ctx.containsVariable('admin')}" href="/authorize"><span>Войти (для администаторов)</span></a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="col-main">
+            <div class="header-h1">
+                <h1>
+                    <span>Добавить театр</span>
+                </h1>
+            </div>
+            <div>
+                <table class="main-table">
+                    <tr class="one">
+                        <td>
+                            <form action="/add_theatre_save" method="get">
+                                <br>
+                                <div class="mb-3">
+                                    <label for="name" class="th">Название:</label>
+                                    <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp">
+                                    <br>
+                                    <label for="address" class="th">Адрес:</label>
+                                    <input type="text" class="form-control" name="address" id="address" aria-describedby="emailHelp">
+                                    <br>
+                                    <label for="gr_fl_rows" class="th">Количество рядов в партере:</label>
+                                    <input type="text" class="form-control" name="gr_fl_rows" id="gr_fl_rows" aria-describedby="emailHelp">
+                                    <br>
+                                    <label for="gr_fl_seats" class="th">Количество мест в ряду в партере:</label>
+                                    <input type="text" class="form-control" name="gr_fl_seats" id="gr_fl_seats" aria-describedby="emailHelp">
+                                    <br>
+                                    <label for="mez_rows" class="th">Количество рядов в бельэтаже:</label>
+                                    <input type="text" class="form-control" name="mez_rows" id="mez_rows" aria-describedby="emailHelp">
+                                    <br>
+                                    <label for="mez_seats" class="th">Количество мест в ряду в бельэтаже:</label>
+                                    <input type="text" class="form-control" name="mez_seats" id="mez_seats" aria-describedby="emailHelp">
+                                    <br>
+                                    <label for="bal_rows" class="th">Количество рядов на балконе:</label>
+                                    <input type="text" class="form-control" name="bal_rows" id="bal_rows" aria-describedby="emailHelp">
+                                    <br>
+                                    <label for="bal_seats" class="th">Количество мест в ряду на балконе:</label>
+                                    <input type="text" class="form-control" name="bal_seats" id="bal_seats" aria-describedby="emailHelp">
+                                    <br>
+                                </div>
+                                <button id="add_button" type="submit" class="double-border-button-right">Добавить</button>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

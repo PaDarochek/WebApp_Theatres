@@ -1,5 +1,7 @@
 package entities;
 
+import DAO.SessionDAO;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,7 +10,7 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @ManyToOne(targetEntity = Session.class)
     @JoinColumn(name = "session", referencedColumnName = "id")
@@ -23,9 +25,10 @@ public class Ticket {
     @Column(name = "row_seat")
     private int row_seat;
 
-    public Ticket(int id, int sessionId, String category, int row, int row_seat) {
+    public Ticket(Long id, Long sessionId, String category, int row, int row_seat) {
         this.id = id;
-        this.session.setId(sessionId);
+        SessionDAO sessionDAO = new SessionDAO();
+        this.session = sessionDAO.getEntityById(sessionId, Session.class);
         this.category = category;
         this.row = row;
         this.row_seat = row_seat;
@@ -34,11 +37,11 @@ public class Ticket {
     public Ticket() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

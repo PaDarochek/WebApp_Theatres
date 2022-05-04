@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="home.css"/>
+    <title>Театры</title>
+</head>
+<body>
+
+    <div class="six">
+        <h1>
+            <span>
+                Театральная касса
+            </span>
+        </h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-menu">
+                    <nav class="menu" id="menu">
+                        <ul>
+                            <li><a href="/"><span>Главная</span></a></li>
+                            <li><a href="/theatres"><span>Театры</span></a></li>
+                            <li><a href="/performances"><span>Представления</span></a></li>
+                            <li><a th:if="${!#ctx.containsVariable('admin')}" href="/authorize"><span>Войти (для администаторов)</span></a></li>
+                            <li><a id="add_theatre" th:if="${#ctx.containsVariable('admin')}" href="/add_theatre">
+                                <span>Добавить театр</span>
+                            </a></li>
+                        </ul>
+                    </nav>
+            </div>
+            <div class="col-main">
+                <div class="header-h1">
+                    <h1>
+                        <span>Театры:</span>
+                    </h1>
+                </div>
+                <table class="main-table">
+                    <tr class="one" th:each="th,stat : ${theatres}">
+                        <td>
+                            <a class="perf" id="ref" th:href="@{'http://localhost:8080/theatre_page?id=' + ${th.getId()}}">
+                                <span th:text="${th.getName()}"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="button-table">
+                    <tr>
+                        <td>
+                            <a id="button-prev" class="double-border-button-left" href="/theatres_prev">Показать предыдущие</a>
+                        </td>
+                        <td>
+                            <a id="button-next" class="double-border-button-right" href="/theatres_next">Показать следующие</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-right">
+                <form action="/theatres_filter" method="get">
+                    <br>
+                    <div class="mb-3">
+                        <label for="name" class="form-label" style="font-palette: light; color: #f7e1cb;">Поиск по названию театра</label>
+                        <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp">
+                    </div>
+                    <br>
+                    <button id="find" name="find" type="submit" class="double-border-button-right">Найти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</script>
+</body>
+</html>

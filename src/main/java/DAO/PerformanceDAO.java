@@ -31,7 +31,7 @@ public class PerformanceDAO implements DAO<Performance, Integer> {
         workers.forEach(worker -> {
             System.out.println("Worker name: " + worker.getName());
         });
-        List<Integer> workersIds = new ArrayList<>();
+        List<Long> workersIds = new ArrayList<>();
         workers.forEach(person -> {
             workersIds.add(person.getId());
         });
@@ -44,7 +44,7 @@ public class PerformanceDAO implements DAO<Performance, Integer> {
         cr.select(root).where(predicates);
         Query<WorkersPerformances> query_2 = session.createQuery(cr);
         List<WorkersPerformances> workersPerformances = query_2.getResultList();
-        List<Integer> performancesIds = new ArrayList<>();
+        List<Long> performancesIds = new ArrayList<>();
         workersPerformances.forEach(entry -> {
             performancesIds.add(entry.getPerformance().getId());
         });
@@ -72,7 +72,7 @@ public class PerformanceDAO implements DAO<Performance, Integer> {
         cr.select(root).where(cb.or(predicates));
         Query query = session.createQuery(cr);
         List<Worker> workers = query.getResultList();
-        List<Integer> workersIds = new ArrayList<>();
+        List<Long> workersIds = new ArrayList<>();
         workers.forEach(person -> {
             workersIds.add(person.getId());
         });
@@ -85,7 +85,7 @@ public class PerformanceDAO implements DAO<Performance, Integer> {
         cr.select(root).where(predicates);
         Query<WorkersPerformances> query_2 = session.createQuery(cr);
         List<WorkersPerformances> workersPerformances = query_2.getResultList();
-        List<Integer> performancesIds = new ArrayList<>();
+        List<Long> performancesIds = new ArrayList<>();
         workersPerformances.forEach(entry -> {
             performancesIds.add(entry.getPerformance().getId());
         });

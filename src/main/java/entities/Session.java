@@ -1,5 +1,8 @@
 package entities;
 
+import DAO.PerformanceDAO;
+import DAO.SessionDAO;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +14,7 @@ public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @ManyToOne(targetEntity = Performance.class)
     @JoinColumn(name = "performance", referencedColumnName = "id")
@@ -21,20 +24,20 @@ public class Session {
     private Timestamp date_time;
 
     @Column(name = "ground_floor_cost")
-    private int ground_floor_cost;
+    private Long ground_floor_cost;
 
     @Column(name = "balcony_cost")
-    private int balcony_cost;
+    private Long balcony_cost;
 
     @Column(name = "mezzanine_cost")
-    private int mezzanine_cost;
+    private Long mezzanine_cost;
 
-    @OneToMany(targetEntity = Ticket.class, mappedBy = "session")
-    private List<Ticket> tickets = new ArrayList<>();
-
-    public Session(int id, int performanceId, Timestamp date_time, int ground_floor_cost, int balcony_cost, int mezzanine_cost) {
+    public Session(Long id, Long performanceId, Timestamp date_time, Long ground_floor_cost, Long balcony_cost,
+                   Long mezzanine_cost) {
         this.id = id;
-        this.performance.setId(performanceId);
+        PerformanceDAO performanceDAO = new PerformanceDAO();
+        this.performance = performanceDAO.getEntityById(performanceId, Performance.class);
+        this.date_time = date_time;
         this.ground_floor_cost = ground_floor_cost;
         this.balcony_cost = balcony_cost;
         this.mezzanine_cost = mezzanine_cost;
@@ -43,11 +46,11 @@ public class Session {
     public Session() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -67,27 +70,41 @@ public class Session {
         this.date_time = date_time;
     }
 
-    public int getGround_floor_cost() {
+    public Long getGround_floor_cost() {
         return ground_floor_cost;
     }
 
-    public void setGround_floor_cost(int ground_floor_cost) {
+    public void setGround_floor_cost(Long ground_floor_cost) {
         this.ground_floor_cost = ground_floor_cost;
     }
 
-    public int getBalcony_cost() {
+    public Long getBalcony_cost() {
         return balcony_cost;
     }
 
-    public void setBalcony_cost(int balcony_cost) {
+    public void setBalcony_cost(Long balcony_cost) {
         this.balcony_cost = balcony_cost;
     }
 
-    public int getMezzanine_cost() {
+    public Long getMezzanine_cost() {
         return mezzanine_cost;
     }
 
-    public void setMezzanine_cost(int mezzanine_cost) {
+    public void setMezzanine_cost(Long mezzanine_cost) {
         this.mezzanine_cost = mezzanine_cost;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object == null) {
+            return false;
+        }
+        if (object.getClass() != this.getClass()) {
+            return false;
+        }
+        final Session other = (Session) object;
+        return (this.id.equals(other.id) && this.performance.equals(other.performance) &&
+                this.date_time.equals(other.date_time) && this.ground_floor_cost.equals(other.ground_floor_cost) &&
+                this.mezzanine_cost.equals(other.mezzanine_cost) && this.balcony_cost.equals(other.balcony_cost));
     }
 }

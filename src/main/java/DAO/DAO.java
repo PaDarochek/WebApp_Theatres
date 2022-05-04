@@ -70,7 +70,7 @@ public interface DAO<E, K> {
         return result;
     }
 
-    default E getEntityById(int id, Class persistentClass) {
+    default E getEntityById(Long id, Class persistentClass) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         E result = (E) session.get(persistentClass, id);
         session.close();
@@ -101,7 +101,12 @@ public interface DAO<E, K> {
                 filter.setParameter(paramName, filterParams.get(i.getAndIncrement()));
             });
         });
-        Query query = session.createQuery("from " + persistentClass.getName())
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery cr = cb.createQuery(persistentClass);
+        Root root = cr.from(persistentClass);
+        cr.orderBy(cb.asc(root.get("name")));
+        cr.select(root);
+        Query query = session.createQuery(cr)
                 .setFirstResult(firstResult).setMaxResults(maxResults);
         List<E> result = query.list();
         session.close();
@@ -120,7 +125,12 @@ public interface DAO<E, K> {
                 filter.setParameter(paramName, filterParams.get(i.getAndIncrement()));
             });
         });
-        Query query = session.createQuery("from " + persistentClass.getName());
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery cr = cb.createQuery(persistentClass);
+        Root root = cr.from(persistentClass);
+        cr.orderBy(cb.asc(root.get("name")));
+        cr.select(root);
+        Query query = session.createQuery(cr);
         List<E> result = query.list();
         session.close();
         return result;

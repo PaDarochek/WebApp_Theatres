@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="home.css"/>
+    <title>Представления</title>
+</head>
+<body>
+    <div class="six">
+        <h1>
+                <span>
+                    Театральная касса
+                </span>
+        </h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-menu">
+                <nav class="menu" id="menu">
+                    <ul>
+                        <li><a href="/"><span>Главная</span></a></li>
+                        <li><a href="/theatres"><span>Театры</span></a></li>
+                        <li><a href="/performances"><span>Представления</span></a></li>
+                        <li><a th:if="${!#ctx.containsVariable('admin')}" href="/authorize"><span>Войти (для администаторов)</span></a></li>
+                        <li><a id="add_performance" th:if="${#ctx.containsVariable('admin')}" href="/add_performance">
+                            <span>Добавить представление</span>
+                        </a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-main">
+                <div class="header-h1">
+                    <h1>
+                        <span>Представления:</span>
+                    </h1>
+                </div>
+                <table class="main-table">
+                    <tr class="many" th:each="perf,stat : ${performances}">
+                        <td>
+                            <a class="perf" th:href="@{'http://localhost:8080/performance_page?id=' + ${perf.getId()}}">
+                                <span th:text="${perf.getName()}"></span>
+                            </a>
+                            <br>
+                            <span class="th" th:text="${perf.getTheatre().getName()}"></span>
+                        </td>
+                        <td>
+                            <div th:each="s : ${sessions.get(perf)}">
+                                <span class="dt" th:text="${new java.text.SimpleDateFormat('dd.MM.yyyy HH:mm')
+                                .format(s.getDate_time())}"></span>
+                                <br>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="button-table">
+                    <tr>
+                        <td>
+                            <a id="button-prev" class="double-border-button-left" href="/performances_prev">Показать предыдущие</a>
+                        </td>
+                        <td>
+                            <a id="button-next" class="double-border-button-right" href="/performances_next">Показать следующие</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-right">
+                <form action="/performances_filter" method="get">
+                    <br>
+                    <div>
+                        <label for="theatre" class="form-label" style="font-palette: light; color: #f7e1cb;">Поиск по названию театра</label>
+                        <input type="text" class="form-control" name="theatre" id="theatre" aria-describedby="emailHelp">
+                        <br>
+                        <br>
+                        <label for="director" class="form-label" style="font-palette: light; color: #f7e1cb;">Поиск по режиссёру</label>
+                        <input type="text" class="form-control" name="director" id="director" aria-describedby="emailHelp">
+                        <br>
+                        <br>
+                        <label for="actors" class="form-label" style="font-palette: light; color: #f7e1cb;">Поиск по актёрам</label>
+                        <input type="text" class="form-control" name="actors" id="actors" aria-describedby="emailHelp">
+                        <br>
+                        <br>
+                        <label for="start_date" class="form-label" style="font-palette: light; color: #f7e1cb;">Поиск по дате (от)</label>
+                        <input type="text" class="form-control" name="start_date" id="start_date" aria-describedby="emailHelp">
+                        <br>
+                        <br>
+                        <label for="end_date" class="form-label" style="font-palette: light; color: #f7e1cb;">Поиск по дате (до)</label>
+                        <input type="text" class="form-control" name="end_date" id="end_date" aria-describedby="emailHelp">
+                    </div>
+                    <br>
+                    <button id="find" name="find" type="submit" class="double-border-button-right">Найти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

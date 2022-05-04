@@ -7,25 +7,7 @@
     <title>Театральная касса</title>
 </head>
 <body>
-<!--<nav class="two">-->
-<!--    <ul>-->
-<!--        <li class="left"><a href="#">Главная</a></li>-->
-<!--        <li class="centre"><a href="#">Театры</a></li>-->
-<!--        <li class="centre"><a href="#">Представления</a></li>-->
-<!--        <li class="right"><a href="#">Войти (для администаторов)</a></li>-->
-<!--    </ul>-->
-<!--</nav>-->
 
-<nav class="menu">
-    <ul>
-        <li><a href="#"><span>Главная</span></a></li>
-        <li><a href="#"><span>Театры</span></a></li>
-        <li><a href="#"><span>Представления</span></a></li>
-        <li><a href="#"><span>Войти (для администаторов)</span></a></li>
-    </ul>
-</nav>
-
-<div class="main">
     <div class="six">
         <h1>
             <span>
@@ -34,27 +16,42 @@
         </h1>
     </div>
 
-    <div class="header-h1">
-        <h1>
-            <span>Предстоящие события:</span>
-        </h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-menu">
+                <nav class="menu" id="menu">
+                    <ul>
+                        <li><a href="/"><span>Главная</span></a></li>
+                        <li><a id="theatres_button" href="/theatres"><span>Театры</span></a></li>
+                        <li><a id="performances_button" href="/performances"><span>Представления</span></a></li>
+                        <li><a id="auth_button" href="/authorize"><span>Войти (для администаторов)</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-main">
+                <div class="header-h1">
+                    <h1>
+                        <span>Предстоящие события:</span>
+                    </h1>
+                </div>
+
+                <table class="main-table">
+                    <tr class="many" th:each="s,stat : ${sessions}">
+                        <td>
+                            <a class="perf" th:href="@{'http://localhost:8080/performance_page?id=' + ${s.getPerformance().getId()}}">
+                                <span th:text="${s.getPerformance().getName()}"></span>
+                            </a>
+                            <br>
+                            <span class="th" th:text="${s.getPerformance().getTheatre().getName()}"></span>
+                        </td>
+                        <td class="dt">
+                            <span th:text='${new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm").format(s.date_time)}'></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 
-    <table>
-        <tr th:each="s,stat : ${sessions}">
-            <td>
-
-                <a class="perf" href="#">
-                    <span th:text="${s.getPerformance().getName()}"></span>
-                </a>
-                <br>
-                <span class="th" th:text="${s.getPerformance().getTheatre().getName()}"></span>
-            </td>
-            <td class="dt">
-                <span th:text='${new java.text.SimpleDateFormat("dd.MM.yyyy HH:mm").format(s.date_time)}'></span>
-            </td>
-        </tr>
-    </table>
-</div>
 </body>
 </html>
